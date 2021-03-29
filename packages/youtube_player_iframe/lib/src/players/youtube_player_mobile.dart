@@ -134,7 +134,9 @@ class _MobileYoutubePlayerState extends State<RawYoutubePlayer>
         if (feature == 'emb_rel_pause') {
           controller.load(uri.queryParameters['v']);
         } else {
-          url_launcher.launch(detail.url);
+          if (Platform.isIOS) {
+            return ShouldOverrideUrlLoadingAction.ALLOW;
+          }
         }
         return ShouldOverrideUrlLoadingAction.CANCEL;
       },
